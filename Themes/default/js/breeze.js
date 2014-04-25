@@ -23,18 +23,36 @@ breeze.tools.findWord = function(string, word){
 breeze.quickEdit = function(options)
 {
 	this.options = options;
+	this.options.buffer = {};
 
 	// Create a textarea and some buttons for saving and cancel.
 	this.options.textArea = jQuery('<textarea/>');
 	this.options.saveButton = jQuery('<button/>', {
-		id: 'loadMoar',
+		id: 'saveEdit',
 		class: 'clear',
-		text: breeze.text.load_more,
+		text: 'save',
 		click: function () {
 
+			// Do we have the data already? otherwise we can't really do much...
+			if (this.options.buffer){
+				this.onSave();
+			}
+
+			// Nope :(
+			else{
+				this.onCancel();
+				// More stuff
+			}
 		}
-	}).appendTo('#tab-wall');
-	this.options.cancelButton
+	});
+	this.options.cancelButton = jQuery('<button/>', {
+		id: 'saveEdit',
+		class: 'clear',
+		text: 'cancel',
+		click: function () {
+			this.onCancel();
+		}
+	});
 }
 
 breeze.quickEdit.prototype.init()
@@ -42,7 +60,7 @@ breeze.quickEdit.prototype.init()
 	// Get the data.
 	jQuery.ajax({
 		type: 'GET',
-		url: smf_scripturl + '?action=breezeajax;sa=quickEdit;js=1;rf=' + breeze.tools.comingFrom,
+		url: this.options.eUrl + 'js=1',
 		data: this.options,
 		cache: false,
 		dataType: 'json',
@@ -51,6 +69,8 @@ breeze.quickEdit.prototype.init()
 		},
 		error: function (html)
 		{
+			// It failed miserably...
+			this.onCancel();
 		}
 });
 
@@ -77,10 +97,11 @@ jQuery(document).ready(function(){
 		event.preventDefault();
 
 		// The most important stuff is the ID and of course what exactly are we editing.
-		var editID = this.data('id');
-		var edittype = this.data('type');
-
-		eQuickEdit = new breeze.quickEdit({eID : editID, eType : editType});
+		eQuickEdit = new breeze.quickEdit({
+			eID : jQuery(this).data('id'),
+			eType : jQuery(this).data('type'),
+			eUrl : jQuery(this).attr('href')
+		});
 		eQuickEdit.init();
 
 		return false;
