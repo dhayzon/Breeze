@@ -20,6 +20,21 @@ breeze.tools.findWord = function(string, word){
 	return string.match('@' + word) !== null;
 }
 
+breeze.quickEdit = function(options)
+{
+	this.options = options;
+
+	// Create a textarea and some buttons for saving and cancel.
+	this.options.textArea = jQuery('<textarea style="padding-left:100px" />');
+	this.options.saveButton
+	this.options.cancelButton
+}
+
+breeze.quickedit.prototype.onCancel()
+{
+
+}
+
 jQuery(document).ready(function(){
 
 	// Posting a new status
