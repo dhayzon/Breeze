@@ -25,17 +25,66 @@ breeze.quickEdit = function(options)
 	this.options = options;
 
 	// Create a textarea and some buttons for saving and cancel.
-	this.options.textArea = jQuery('<textarea style="padding-left:100px" />');
-	this.options.saveButton
+	this.options.textArea = jQuery('<textarea/>');
+	this.options.saveButton = jQuery('<button/>', {
+		id: 'loadMoar',
+		class: 'clear',
+		text: breeze.text.load_more,
+		click: function () {
+
+		}
+	}).appendTo('#tab-wall');
 	this.options.cancelButton
 }
 
-breeze.quickedit.prototype.onCancel()
+breeze.quickEdit.prototype.init()
+{
+	// Get the data.
+	jQuery.ajax({
+		type: 'GET',
+		url: smf_scripturl + '?action=breezeajax;sa=quickEdit;js=1;rf=' + breeze.tools.comingFrom,
+		data: this.options,
+		cache: false,
+		dataType: 'json',
+		success: function(html)
+		{
+		},
+		error: function (html)
+		{
+		}
+});
+
+	// Apply some stuff?
+
+	// Replace the content with the textarea.
+}
+
+breeze.quickEdit.prototype.onCancel()
+{
+
+}
+
+breeze.quickEdit.prototype.onSaving()
 {
 
 }
 
 jQuery(document).ready(function(){
+
+	// Editing
+	jQuery(document).on('click', '.quickEditA', function(event){
+
+		event.preventDefault();
+
+		// The most important stuff is the ID and of course what exactly are we editing.
+		var editID = this.data('id');
+		var edittype = this.data('type');
+
+		eQuickEdit = new breeze.quickEdit({eID : editID, eType : editType});
+		eQuickEdit.init();
+
+		return false;
+	});
 
 	// Posting a new status
 	jQuery('#form_status').submit(function(event){

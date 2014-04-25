@@ -43,7 +43,7 @@ function breeze_status($data, $returnVar = false)
 							'. $context['Breeze']['user_info'][$status['poster_id']]['link'] .'
 						</div>
 						<div class="breeze_user_status_comment">
-							'. $status['body'] .'
+							<div class="quickEdit_'.  $status['id'].'">'. $status['body'] .'</div>
 							<div class="breeze_options">
 								<span class="time_elapsed" title="'. timeformat($status['time_raw'], false) .'" data-livestamp="'. $status['time_raw'] .'">'. $status['time'] .' </span>';
 
@@ -53,6 +53,8 @@ function breeze_status($data, $returnVar = false)
 								'| <a href="'. $scripturl .'?action=breezeajax;sa=delete;bid='. $status['id'] .';type=status;profileOwner='. $status['owner_id'] .';poster='. $status['poster_id'] .''. (!empty($context['Breeze']['comingFrom']) ? ';rf='. $context['Breeze']['comingFrom'] : '') .';'. $context['session_var'] .'='. $context['session_id'] .'" id="deleteStatus_'. $status['id'] .'" class="breeze_delete_status">'. $txt['Breeze_general_delete'] .'</a>';
 
 		// Modify? maybe someday...
+		if ($canHas['edit'])
+								'| <a href="#" data-id="'. $status['id'] .'" data-type="status" class="quickEditA">Edit</a>';
 
 		$echo .= '
 							</div>
