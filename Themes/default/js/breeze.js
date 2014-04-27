@@ -48,7 +48,7 @@ breeze.quickEdit = function(options)
 	this.options.cancelButton = jQuery('<button/>', {
 		id: 'saveEdit',
 		class: 'clear',
-		text: 'cancel',
+		text: breeze.text.confirm_cancel,
 		click: function () {
 			this.onCancel();
 		}
