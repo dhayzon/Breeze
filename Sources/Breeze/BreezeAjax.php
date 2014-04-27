@@ -760,22 +760,22 @@ class BreezeAjax
 	 * Gets data from a single status/comment and sends back its content.
 	 * @return
 	 */
-	public function post()
+	public function quickEdit()
 	{
 		$data = Breeze::data('request');
 		$return = array();
 
 		// if we have what we need, let us proceed...
 		$return = $this->_app['query']->quickQuery(
-				array(
-					'table' => 'breeze_'. $data->get('type'),
-					'rows' => $data->get('type') .'_body',
-					'where' => $data->get('type') .'_id = {int:id}',
-				),
-				array(
-					'id' => $data->get('bid')
-				),
-			);
+			array(
+				'table' => 'breeze_'. $data->get('type'),
+				'rows' => $data->get('type') .'_body',
+				'where' => $data->get('type') .'_id = {int:id}',
+			),
+			array(
+				'id' => $data->get('bid')
+			)
+		);
 
 		// Got something?
 		if (empty($return))
