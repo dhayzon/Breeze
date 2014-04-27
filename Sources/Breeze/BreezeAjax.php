@@ -765,22 +765,36 @@ class BreezeAjax
 		$data = Breeze::data('request');
 		$return = array();
 
-		// if we have what we need, let us proceed...
-		$return = $this->_app['query']->quickQuery(
-			array(
-				'table' => 'breeze_'. $data->get('type'),
-				'rows' => $data->get('type') .'_body',
-				'where' => $data->get('type') .'_id = {int:id}',
-			),
-			array(
-				'id' => $data->get('bid')
-			)
-		);
+		$type = $data->get('type');
+		$id = $data->get('bid');
 
-		// Got something?
-		if (empty($return))
+		// if we have what we need, let us proceed...
+		if (empty($type) || empty($id))
+			return $this->setResponse(array(
+				'message' => 'wrong_values',
+				'type' => 'error',
+				'extra' => array('area' => 'breezenoti',),
+				'owner' => $user,
+			));
+
+		else
 		{
-		 // Stuff here...
+			$return = $this->_app['query']->quickQuery(
+				array(
+					'table' => 'breeze_'. $data->get('type'),
+					'rows' => $type .'_body',
+					'where' => $type .'_id = {int:id}',
+				),
+				array(
+					'id' => $id
+				)
+			);
+
+			// Got something?
+			if (empty($return))
+			{
+			 // Stuff here...
+			}
 		}
 	}
 
