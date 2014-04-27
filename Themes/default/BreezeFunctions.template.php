@@ -54,7 +54,7 @@ function breeze_status($data, $returnVar = false)
 
 		// Modify? maybe someday...
 		if ($canHas['edit'])
-								'| <a href="#" data-id="'. $status['id'] .'" data-type="status" class="quickEditA">Edit</a>';
+								'| <a href="'. $scripturl .'?action=breezeajax;sa=quickedit;bid='. $status['id'] .';type=status;profileOwner='. $status['owner_id'] .';poster='. $status['poster_id'] .''. (!empty($context['Breeze']['comingFrom']) ? ';rf='. $context['Breeze']['comingFrom'] : '') .';'. $context['session_var'] .'='. $context['session_id'] .'" data-id="'. $status['id'] .'" data-type="status" class="quickEditA">'. $txt['Breeze_general_edit'] .'</a>';
 
 		$echo .= '
 							</div>
