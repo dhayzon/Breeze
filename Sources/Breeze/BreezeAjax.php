@@ -767,6 +767,8 @@ class BreezeAjax
 
 		$type = $data->get('type');
 		$id = $data->get('bid');
+		$profileOwner = $data->get('profile_owner');
+		$messageOwner = $data->get('message_owner');
 
 		// if we have what we need, let us proceed...
 		if (empty($type) || empty($id))
@@ -774,7 +776,7 @@ class BreezeAjax
 				'message' => 'wrong_values',
 				'type' => 'error',
 				'extra' => array('area' => 'breezenoti',),
-				'owner' => $user,
+				'owner' => $profileOwner,
 			));
 
 		else
@@ -790,11 +792,14 @@ class BreezeAjax
 				)
 			);
 
-			// Got something?
+			// Got something? send it at once!!!
 			if (empty($return))
-			{
-			 // Stuff here...
-			}
+				$this->setResponse(array(
+					'type' => '',
+					'message' => '',
+					'data' => $return,
+					'owner' => $profileOwner,
+				));
 		}
 	}
 
