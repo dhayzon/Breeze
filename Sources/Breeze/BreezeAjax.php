@@ -767,8 +767,8 @@ class BreezeAjax
 
 		$type = $data->get('type');
 		$id = $data->get('bid');
-		$profileOwner = $data->get('profile_owner');
-		$messageOwner = $data->get('message_owner');
+		$profileOwner = $data->get('profileOwner');
+		$poster = $data->get('poster');
 
 		// if we have what we need, let us proceed...
 		if (empty($type) || empty($id))
