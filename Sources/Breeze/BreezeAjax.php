@@ -775,7 +775,6 @@ class BreezeAjax
 			return $this->setResponse(array(
 				'message' => 'wrong_values',
 				'type' => 'error',
-				'extra' => array('area' => 'breezenoti',),
 				'owner' => $profileOwner,
 			));
 
@@ -793,13 +792,19 @@ class BreezeAjax
 			);
 
 			// Got something? send it at once!!!
-			if (empty($return))
+			if (!empty($return))
+			{
+				// Make it prettier....
+				$return['body'] = $return[$type .'_body'];
+				unset($return[$type .'_body']);
+
 				$this->setResponse(array(
 					'type' => '',
 					'message' => '',
 					'data' => $return,
 					'owner' => $profileOwner,
 				));
+			}
 		}
 	}
 

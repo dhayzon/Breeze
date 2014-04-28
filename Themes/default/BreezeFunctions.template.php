@@ -52,7 +52,7 @@ function breeze_status($data, $returnVar = false)
 			$echo .=
 								'| <a href="'. $scripturl .'?action=breezeajax;sa=delete;bid='. $status['id'] .';type=status;profileOwner='. $status['owner_id'] .';poster='. $status['poster_id'] .''. (!empty($context['Breeze']['comingFrom']) ? ';rf='. $context['Breeze']['comingFrom'] : '') .';'. $context['session_var'] .'='. $context['session_id'] .'" id="deleteStatus_'. $status['id'] .'" class="breeze_delete_status">'. $txt['Breeze_general_delete'] .'</a>';
 
-		// Modify? maybe someday...
+		// Modify?
 		if ($canHas['edit'])
 								'| <a href="'. $scripturl .'?action=breezeajax;sa=quickedit;bid='. $status['id'] .';type=status;profileOwner='. $status['owner_id'] .';poster='. $status['poster_id'] .''. (!empty($context['Breeze']['comingFrom']) ? ';rf='. $context['Breeze']['comingFrom'] : '') .';'. $context['session_var'] .'='. $context['session_id'] .'" data-id="'. $status['id'] .'" data-type="status" class="quickEditA">'. $txt['Breeze_general_edit'] .'</a>';
 

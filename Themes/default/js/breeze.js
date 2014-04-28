@@ -66,6 +66,10 @@ breeze.quickEdit.prototype.init()
 		dataType: 'json',
 		success: function(html)
 		{
+			this.options.buffer = html.body;
+
+			// Make it happen...
+			this.onReplace();
 		},
 		error: function (html)
 		{

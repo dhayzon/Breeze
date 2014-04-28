@@ -24,6 +24,7 @@ $txt['Breeze_general_loading'] = 'Loading...';
 $txt['Breeze_general_like'] = 'Like';
 $txt['Breeze_general_last_view'] = 'Last view';
 $txt['Breeze_general_delete'] = 'Delete';
+$txt['Breeze_general_edit'] = 'Edit';
 $txt['Breeze_general_unlike'] = 'Unlike';
 $txt['Breeze_general_plural'] = '(s)';
 $txt['Breeze_general_activity'] = 'Latest buddie\'s activity';
